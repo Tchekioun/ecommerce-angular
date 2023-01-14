@@ -1,20 +1,7 @@
-<table class="table table-hover">
-  <thead class="table-dark">
-    <tr>
-      <th>image</th>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Unit in Stock</th>
-      <th>date creation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let product of products">
-      <td><img src="{{ product.image_url }}" height="50" alt="" /></td>
-      <td>{{ product.name }}</td>
-      <td>{{ product.unit_price }}</td>
-      <td>{{ product.units_in_stock }}</td>
-      <td>{{ product.date_created | date : "short" }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="main-content">
+  <div class="section-content section-content-p30">
+    <div class="container-fluid">
+      <div class="row">loop over the collection of the products</div>
+    </div>
+  </div>
+</div>
