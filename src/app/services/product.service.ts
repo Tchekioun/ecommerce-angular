@@ -22,4 +22,10 @@ export class ProductService {
   getCategories(): Observable<Category[]> {
     return this.httpClient.get<Category[]>(this.categoryUrl);
   }
+
+  searchProducts(theKeywordo: string): Observable<Product[]> {
+    return this.httpClient.get<Product[]>(
+      `${this.baseUrl}/search/findByNameContaining?name=${theKeywordo}`
+    );
+  }
 }
