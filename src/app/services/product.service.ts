@@ -8,10 +8,14 @@ import { Product } from '../common/product';
   providedIn: 'root',
 })
 export class ProductService {
-  private baseUrl = 'http://localhost:3000/products';
   private categoryUrl = 'http://localhost:3000/categories';
+  private baseUrl = 'http://localhost:3000/products';
 
   constructor(private httpClient: HttpClient) {}
+
+  getCategories(): Observable<Category[]> {
+    return this.httpClient.get<Category[]>(this.categoryUrl);
+  }
 
   getProductList(id: number): Observable<Product[]> {
     return this.httpClient.get<Product[]>(
@@ -19,13 +23,13 @@ export class ProductService {
     );
   }
 
-  getCategories(): Observable<Category[]> {
-    return this.httpClient.get<Category[]>(this.categoryUrl);
-  }
-
   searchProducts(theKeywordo: string): Observable<Product[]> {
     return this.httpClient.get<Product[]>(
       `${this.baseUrl}/search/findByNameContaining?name=${theKeywordo}`
     );
+  }
+
+  getProductDetails(id: number) {
+    return this.httpClient.get<Product>(`${this.baseUrl}/${id}`);
   }
 }
