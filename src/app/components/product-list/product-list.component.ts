@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/common/product';
+import { ProductPage } from 'src/app/common/product-page';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -17,6 +18,8 @@ export class ProductListComponent implements OnInit {
   thePageNumber: number = 1;
   thePageSize: number = 5;
   theTotalElements: number = 0;
+
+  previousKeyword: string = '';
 
   constructor(
     private productService: ProductService,
@@ -60,10 +63,22 @@ export class ProductListComponent implements OnInit {
   }
 
   handleSearchProduct() {
-    const theKeywordo: string = this.route.snapshot.paramMap.get('keyword')!;
-    this.productService.searchProducts(theKeywordo).subscribe((data) => {
-      this.products = data;
-    });
+    const theKeyword: string = this.route.snapshot.paramMap.get('keyword')!;
+
+    if (this.previousKeyword != theKeyword) {
+      this.thePageNumber = 1;
+    }
+
+    this.previousKeyword = theKeyword;
+    console.log(`keyword = ${theKeyword}`);
+    this.productService
+      .searchProductPaginate(
+        this.thePageNumber,
+        this.thePageSize,
+        this.currentCateogryId,
+        theKeyword
+      )
+      .subscribe(this.processResulst());
   }
 
   listProducts() {
@@ -78,5 +93,14 @@ export class ProductListComponent implements OnInit {
   updatePageSize(value: number) {
     this.thePageSize = value;
     this.listProducts();
+  }
+
+  processResulst() {
+    return (data: ProductPage) => {
+      this.products = data.products;
+      this.thePageNumber = data.page.thePageNumber;
+      this.thePageSize = data.page.thePageSize;
+      this.theTotalElements = data.page.theTotalElements;
+    };
   }
 }
