@@ -15,7 +15,7 @@ export class ProductListComponent implements OnInit {
   searchMode: boolean = false;
 
   thePageNumber: number = 1;
-  thePageSize: number = 10;
+  thePageSize: number = 5;
   theTotalElements: number = 0;
 
   constructor(
@@ -73,5 +73,10 @@ export class ProductListComponent implements OnInit {
     } else {
       this.handleListProducts();
     }
+  }
+
+  updatePageSize(value: number) {
+    this.thePageSize = value;
+    this.handleListProducts();
   }
 }

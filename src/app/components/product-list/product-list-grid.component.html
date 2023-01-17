@@ -37,6 +37,16 @@
                   [collectionSize]="theTotalElements"
                   (pageChange)="listProducts()"
                 ></ngb-pagination>
+                <span class="mr-2"> Page size</span>
+                <select
+                  #myPageSelect
+                  (change)="updatePageSize(+myPageSelect.value)"
+                >
+                  <option value="5" selected="true">5</option>
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="50">50</option>
+                </select>
               </div>
             </div>
           </div>
