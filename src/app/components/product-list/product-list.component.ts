@@ -11,7 +11,12 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
   currentCateogryId: number = 1;
+  previousCategoryId: number = 1;
   searchMode: boolean = false;
+
+  thePageNumber: number = 1;
+  thePageSize: number = 10;
+  theTotalElements: number = 0;
 
   constructor(
     private productService: ProductService,
@@ -30,10 +35,27 @@ export class ProductListComponent implements OnInit {
     } else {
       this.currentCateogryId = 1;
     }
+
+    if (this.previousCategoryId != this.currentCateogryId) {
+      this.thePageNumber = 1;
+    }
+
+    this.previousCategoryId = this.currentCateogryId;
+    console.log(
+      `cuurent category ${this.currentCateogryId} PageNumber: ${this.thePageNumber}`
+    );
+
     this.productService
-      .getProductList(this.currentCateogryId)
+      .getProductListPaginate(
+        this.thePageNumber,
+        this.thePageSize,
+        this.currentCateogryId
+      )
       .subscribe((data) => {
-        this.products = data;
+        this.products = data.products;
+        this.theTotalElements = data.page.theTotalElements;
+        this.thePageNumber = data.page.thePageNumber;
+        this.thePageSize = data.page.thePageSize;
       });
   }
 
