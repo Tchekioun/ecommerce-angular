@@ -5,7 +5,9 @@
       {{ product.name }}
     </h3>
     <div class="price">{{ product.unit_price | currency : "USD" }}</div>
-    <a href="#" class="primary-button">Add to cart</a>
+    <button (click)="addToCart(product)" class="btn btn-primary btn-sm">
+      Add to cart
+    </button>
     <h4>Description</h4>
     <p>{{ product.description }}</p>
     <a routerLink="/products" class="mt-5">Backto Product List</a>
