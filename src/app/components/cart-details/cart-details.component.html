@@ -36,7 +36,10 @@
                     {{ cartItem.quantity }}
                   </div>
                   <div class="col">
-                    <button class="btn btn-primary btn-sm">
+                    <button
+                      (click)="decrementQuantity(cartItem)"
+                      class="btn btn-primary btn-sm"
+                    >
                       <i class="fas fa-minus"></i>
                     </button>
                   </div>
