@@ -8,6 +8,9 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./cart-details.component.css'],
 })
 export class CartDetailsComponent implements OnInit {
+  incrementQuantity(theCartItem: CartItem) {
+    this.cartService.addToCart(theCartItem);
+  }
   constructor(private cartService: CartService) {}
 
   cartItems: CartItem[] = [];
