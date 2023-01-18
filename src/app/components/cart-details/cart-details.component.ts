@@ -8,6 +8,9 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./cart-details.component.css'],
 })
 export class CartDetailsComponent implements OnInit {
+  remove(theCartItem: CartItem) {
+    this.cartService.remove(theCartItem);
+  }
   decrementQuantity(theCartItem: CartItem) {
     this.cartService.decrementQuantity(theCartItem);
   }
