@@ -33,5 +33,32 @@ export class CartService {
     else this.cartItems.push(theCartItem);
 
     //compute the total price and the total quantity
+    this.computeCartTotals();
+  }
+  computeCartTotals() {
+    let totalPriceValue: number = 0;
+    let totalQuantityValue: number = 0;
+
+    for (let currentCartItem of this.cartItems) {
+      totalPriceValue += currentCartItem.unit_price * currentCartItem.quanitity;
+      totalQuantityValue += currentCartItem.quanitity;
+    }
+
+    //publish the totalPrice and the TotalQuantity
+
+    this.totalPrice.next(totalPriceValue);
+    this.totalQuantity.next(totalQuantityValue);
+
+    this.logCartData(totalPriceValue, totalQuantityValue);
+  }
+  logCartData(totalPriceValue: number, totalQuantityValue: number) {
+    for (let tempCartItem of this.cartItems) {
+      const subTotalPrice = tempCartItem.unit_price * tempCartItem.quanitity;
+      console.log(
+        `name: ${tempCartItem.name} subtotalPrice: ${totalPriceValue},  quantity: ${totalQuantityValue}`
+      );
+    }
+    console.log(totalPriceValue.toFixed(2), totalQuantityValue);
+    console.log('----------');
   }
 }
