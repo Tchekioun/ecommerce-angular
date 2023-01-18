@@ -15,7 +15,7 @@ import { CartDetailsComponent } from './components/cart-details/cart-details.com
 
 const routes: Routes = [
   { path: 'category/:id', component: ProductListComponent },
-  { path: 'shopping-detail', component: CartDetailsComponent },
+  { path: 'cart-detail', component: CartDetailsComponent },
   { path: 'search/:keyword', component: ProductListComponent },
   { path: 'category', component: ProductListComponent },
   { path: 'products', component: ProductListComponent },
