@@ -14,8 +14,10 @@ export class CartService {
   remove(theCartItem: CartItem) {
     //get the index of the item in the array
     const itemIndex = this.cartItems.findIndex(
-      (tempCartItem) => (tempCartItem.id = theCartItem.id)
+      (tempCartItem) => tempCartItem.id === theCartItem.id
     );
+
+    console.log(`item index is ${itemIndex}`);
 
     //if found, remouve it
     if (itemIndex > -1) {
@@ -70,7 +72,7 @@ export class CartService {
     for (let tempCartItem of this.cartItems) {
       const subTotalPrice = tempCartItem.unit_price * tempCartItem.quantity;
       console.log(
-        `name: ${tempCartItem.name} subtotalPrice: ${totalPriceValue},  quantity: ${tempCartItem.quantity}`
+        `id: ${tempCartItem.id} name: ${tempCartItem.name} subtotalPrice: ${totalPriceValue},  quantity: ${tempCartItem.quantity}`
       );
     }
     console.log(totalPriceValue.toFixed(2), totalQuantityValue);
