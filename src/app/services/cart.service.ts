@@ -27,7 +27,7 @@ export class CartService {
       alreadyExistInCart = existingCartItem != undefined;
     }
 
-    if (alreadyExistInCart) existingCartItem!.quanitity++;
+    if (alreadyExistInCart) existingCartItem!.quantity++;
     else this.cartItems.push(theCartItem);
 
     //compute the total price and the total quantity
@@ -38,8 +38,8 @@ export class CartService {
     let totalQuantityValue: number = 0;
 
     for (let currentCartItem of this.cartItems) {
-      totalPriceValue += currentCartItem.unit_price * currentCartItem.quanitity;
-      totalQuantityValue += currentCartItem.quanitity;
+      totalPriceValue += currentCartItem.unit_price * currentCartItem.quantity;
+      totalQuantityValue += currentCartItem.quantity;
     }
 
     //publish the totalPrice and the TotalQuantity
@@ -51,9 +51,9 @@ export class CartService {
   }
   logCartData(totalPriceValue: number, totalQuantityValue: number) {
     for (let tempCartItem of this.cartItems) {
-      const subTotalPrice = tempCartItem.unit_price * tempCartItem.quanitity;
+      const subTotalPrice = tempCartItem.unit_price * tempCartItem.quantity;
       console.log(
-        `name: ${tempCartItem.name} subtotalPrice: ${totalPriceValue},  quantity: ${tempCartItem.quanitity}`
+        `name: ${tempCartItem.name} subtotalPrice: ${totalPriceValue},  quantity: ${tempCartItem.quantity}`
       );
     }
     console.log(totalPriceValue.toFixed(2), totalQuantityValue);
