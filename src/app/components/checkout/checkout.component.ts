@@ -18,7 +18,7 @@ export class CheckoutComponent implements OnInit {
         lastName: [''],
         email: [''],
       }),
-      shoppingAddress: this.formBuilder.group({
+      shippingAddress: this.formBuilder.group({
         street: [''],
         city: [''],
         state: [''],
@@ -46,5 +46,15 @@ export class CheckoutComponent implements OnInit {
   onSubmit() {
     console.log('Handling the submition');
     console.log(this.checkoutFormGroup.get('customer')?.value);
+  }
+
+  copyShippingAddressToBillingAddress(event: any) {
+    if (event.target.checked) {
+      this.checkoutFormGroup.controls['billingAddress'].setValue(
+        this.checkoutFormGroup.controls['shippingAddress'].value
+      );
+    } else {
+      this.checkoutFormGroup.controls['billingAddress'].reset();
+    }
   }
 }

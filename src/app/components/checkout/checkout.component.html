@@ -29,13 +29,13 @@
             </div>
           </div>
         </div>
-        <div formGroupName="shippingAsdress" class="form-area">
+        <div formGroupName="shippingAddress" class="form-area">
           <h3>Shipping Address</h3>
           <div class="row">
             <div class="col-md-2"><label for="">Country</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <select formControlName="street">
+                <select formControlName="country">
                   <option value="">TO DO</option>
                 </select>
               </div>
@@ -67,12 +67,70 @@
               </div>
             </div>
           </div>
+          <div class="row">
+            <div class="col-md-2"><label for="">Zip Code</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input type="text" formControlName="zipCode" />
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="row">
-          <div class="col-md-2"><label for="">Zip Code</label></div>
-          <div class="col-md-9">
-            <div class="input-space">
-              <input type="text" formControlName="zipCode" />
+
+        <div class="input-space">
+          <label class="au-checkbox">
+            <input
+              type="checkbox"
+              (change)="copyShippingAddressToBillingAddress($event)"
+            />
+            <span class="au-checkmark"></span>Billing address same as Shipping
+            address
+          </label>
+        </div>
+        <div formGroupName="billingAddress" class="form-area">
+          <h3>Billing Address</h3>
+          <div class="row">
+            <div class="col-md-2"><label for="">Country</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <select formControlName="country">
+                  <option value="">TO DO</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2"><label for="">Street</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input type="text" formControlName="street" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2"><label for="">City</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input type="text" formControlName="city" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2"><label for="">State</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <select formControlName="state">
+                  <option value="">TO DO</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2"><label for="">Zip Code</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input type="text" formControlName="zipCode" />
+              </div>
             </div>
           </div>
         </div>
