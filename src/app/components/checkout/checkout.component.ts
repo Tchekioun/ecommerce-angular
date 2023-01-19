@@ -8,6 +8,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class CheckoutComponent implements OnInit {
   checkoutFormGroup!: FormGroup;
+  totalQuantity: number = 0;
+  totalPrice: number = 0;
 
   constructor(private formBuilder: FormBuilder) {}
 
