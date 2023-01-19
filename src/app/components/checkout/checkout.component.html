@@ -1,7 +1,7 @@
 <div class="main-content page-m">
   <div class="section-content section-content-p30">
     <div class="container-fluid">
-      <form [formGroup]="checkoutFormGroup">
+      <form [formGroup]="checkoutFormGroup" (ngSubmit)="onSubmit()">
         <div formGroupName="customer" class="form-area">
           <h3>Customer</h3>
           <div class="row">
@@ -9,6 +9,22 @@
             <div class="col-md-9">
               <div class="input-space">
                 <input type="text" formControlName="firstName" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2"><label for="">Last Name</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input type="text" formControlName="lastName" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2"><label for="">Email</label></div>
+            <div class="col-md-9">
+              <div class="input-space">
+                <input type="text" formControlName="email" />
               </div>
             </div>
           </div>
