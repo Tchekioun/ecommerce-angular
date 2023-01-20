@@ -47,9 +47,9 @@ export class CheckoutComponent implements OnInit {
         cardType: [''],
         nameOnCard: [''],
         cardNumber: [''],
-        securtiyCode: [''],
+        securityCode: [''],
         experationMonth: [''],
-        experationyear: [''],
+        expirationyear: [''],
       }),
     });
 
@@ -85,5 +85,23 @@ export class CheckoutComponent implements OnInit {
     } else {
       this.checkoutFormGroup.controls['billingAddress'].reset();
     }
+  }
+
+  handleMonthsAndYears() {
+    const creditCardFormGroup = this.checkoutFormGroup.get('creditCard');
+    const currentYear: number = new Date().getFullYear();
+    const selectedYear: number = Number(
+      creditCardFormGroup?.value.expirationyear
+    );
+    let startMonth: number;
+    if (selectedYear === currentYear) {
+      startMonth = new Date().getMonth() + 1;
+    } else {
+      startMonth = 1;
+    }
+    this.myformservice.getCrediCardMonths(startMonth).subscribe((data) => {
+      console.log(`YOU GOOD ${JSON.stringify(data)}`);
+      this.creditCardMonths = data;
+    });
   }
 }
