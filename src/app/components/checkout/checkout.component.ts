@@ -11,12 +11,15 @@ import { MyformService } from 'src/app/services/myform.service';
   styleUrls: ['./checkout.component.css'],
 })
 export class CheckoutComponent implements OnInit {
-  states: State[] = [];
+  shippingAddressStates: State[] = [];
+  billingAddressStates: State[] = [];
   getStates(formGroupName: string) {
     const formGroup = this.checkoutFormGroup.get(formGroupName);
     const country_id = formGroup?.value.country;
     this.myformservice.getStates(country_id).subscribe((data) => {
-      this.states = data;
+      if (formGroupName === 'shippingAddress')
+        this.shippingAddressStates = data;
+      else this.billingAddressStates = data;
     });
   }
   checkoutFormGroup!: FormGroup;

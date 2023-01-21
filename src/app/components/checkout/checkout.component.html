@@ -70,7 +70,11 @@
             <div class="col-md-9">
               <div class="input-space">
                 <select formControlName="state">
-                  <option *ngFor="let state of states">{{ state.name }}</option>
+                  <option
+                    *ngFor="let shippingAddressState of shippingAddressStates"
+                  >
+                    {{ shippingAddressState.name }}
+                  </option>
                 </select>
               </div>
             </div>
@@ -133,7 +137,11 @@
             <div class="col-md-9">
               <div class="input-space">
                 <select formControlName="state">
-                  <option *ngFor="let state of states">{{ state.name }}</option>
+                  <option
+                    *ngFor="let billingAddressState of billingAddressStates"
+                  >
+                    {{ billingAddressState.name }}
+                  </option>
                 </select>
               </div>
             </div>
