@@ -105,7 +105,10 @@
             <div class="col-md-2"><label for="">Country</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <select formControlName="country">
+                <select
+                  (change)="getStates('billingAddress')"
+                  formControlName="country"
+                >
                   <option
                     *ngFor="let country of countries"
                     [ngValue]="country.id"
