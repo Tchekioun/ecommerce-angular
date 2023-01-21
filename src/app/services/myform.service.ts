@@ -1,11 +1,24 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { Country } from '../common/country';
+import { State } from '../common/state';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MyformService {
-  constructor() {}
+  private countriesUrl = 'http://localhost:3000/countries';
+
+  getCountries(): Observable<Country[]> {
+    return this.httpClient.get<Country[]>(this.countriesUrl);
+  }
+
+  getStates(country_id: string): Observable<State[]> {
+    return this.httpClient.get<State[]>(`${this.countriesUrl}/${country_id}`);
+  }
+
+  constructor(private httpClient: HttpClient) {}
 
   getCrediCardMonths(startMonth: number): Observable<number[]> {
     let data: number[] = [];
