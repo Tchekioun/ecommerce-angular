@@ -13,21 +13,14 @@ import { MyformService } from 'src/app/services/myform.service';
 export class CheckoutComponent implements OnInit {
   shippingAddressStates: State[] = [];
   billingAddressStates: State[] = [];
-  getStates(formGroupName: string) {
-    const formGroup = this.checkoutFormGroup.get(formGroupName);
-    const country_id = formGroup?.value.country;
-    this.myformservice.getStates(country_id).subscribe((data) => {
-      if (formGroupName === 'shippingAddress')
-        this.shippingAddressStates = data;
-      else this.billingAddressStates = data;
-    });
-  }
+
   checkoutFormGroup!: FormGroup;
   totalQuantity: number = 0;
   totalPrice: number = 0;
 
   creditCardYears: number[] = [];
   creditCardMonths: number[] = [];
+
   countries: Country[] = [];
 
   constructor(
@@ -122,6 +115,16 @@ export class CheckoutComponent implements OnInit {
     this.myformservice.getCrediCardMonths(startMonth).subscribe((data) => {
       console.log(`YOU GOOD ${JSON.stringify(data)}`);
       this.creditCardMonths = data;
+    });
+  }
+
+  getStates(formGroupName: string) {
+    const formGroup = this.checkoutFormGroup.get(formGroupName);
+    const country_id = formGroup?.value.country;
+    this.myformservice.getStates(country_id).subscribe((data) => {
+      if (formGroupName === 'shippingAddress')
+        this.shippingAddressStates = data;
+      else this.billingAddressStates = data;
     });
   }
 }
