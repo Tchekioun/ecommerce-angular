@@ -35,7 +35,10 @@
             <div class="col-md-2"><label for="">Country</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <select formControlName="country">
+                <select
+                  (change)="getStates('shippingAddress')"
+                  formControlName="country"
+                >
                   <option
                     *ngFor="let country of countries"
                     [ngValue]="country.id"
@@ -67,7 +70,7 @@
             <div class="col-md-9">
               <div class="input-space">
                 <select formControlName="state">
-                  <option value="">TO DO</option>
+                  <option *ngFor="let state of states">{{ state.name }}</option>
                 </select>
               </div>
             </div>
@@ -130,7 +133,7 @@
             <div class="col-md-9">
               <div class="input-space">
                 <select formControlName="state">
-                  <option value="">TO DO</option>
+                  <option *ngFor="let state of states">{{ state.name }}</option>
                 </select>
               </div>
             </div>

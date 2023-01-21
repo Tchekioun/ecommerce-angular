@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Country } from 'src/app/common/country';
+import { State } from 'src/app/common/state';
 import { CartService } from 'src/app/services/cart.service';
 import { MyformService } from 'src/app/services/myform.service';
 
@@ -10,6 +11,14 @@ import { MyformService } from 'src/app/services/myform.service';
   styleUrls: ['./checkout.component.css'],
 })
 export class CheckoutComponent implements OnInit {
+  states: State[] = [];
+  getStates(formGroupName: string) {
+    const formGroup = this.checkoutFormGroup.get(formGroupName);
+    const country_id = formGroup?.value.country;
+    this.myformservice.getStates(country_id).subscribe((data) => {
+      this.states = data;
+    });
+  }
   checkoutFormGroup!: FormGroup;
   totalQuantity: number = 0;
   totalPrice: number = 0;
