@@ -9,6 +9,7 @@ import { Country } from 'src/app/common/country';
 import { State } from 'src/app/common/state';
 import { CartService } from 'src/app/services/cart.service';
 import { MyformService } from 'src/app/services/myform.service';
+import { MyFormValidators } from 'src/app/validators/my-form-validators';
 
 @Component({
   selector: 'app-checkout',
@@ -37,10 +38,14 @@ export class CheckoutComponent implements OnInit {
   ngOnInit(): void {
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
-        firstName: new FormControl('', [
-          Validators.required,
-          Validators.minLength(2),
-        ]),
+        firstName: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(2),
+            MyFormValidators.notOnlyWhitespace,
+          ],
+        ],
         lastName: new FormControl('', [
           Validators.required,
           Validators.minLength(2),
