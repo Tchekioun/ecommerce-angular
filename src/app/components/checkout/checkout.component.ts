@@ -47,7 +47,7 @@ export class CheckoutComponent implements OnInit {
         ]),
         email: new FormControl('', [
           Validators.required,
-          Validators.pattern('^[w-.]+@([w-]+.)+[w-]{2,4}$'),
+          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
         ]),
       }),
       shippingAddress: this.formBuilder.group({
@@ -100,6 +100,9 @@ export class CheckoutComponent implements OnInit {
   onSubmit() {
     console.log('Handling the submition');
     console.log(this.checkoutFormGroup.get('customer')?.value);
+    if (this.checkoutFormGroup.invalid) {
+      this.checkoutFormGroup.markAllAsTouched();
+    }
   }
 
   get firstName() {
