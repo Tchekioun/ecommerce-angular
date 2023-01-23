@@ -142,7 +142,7 @@ export class CheckoutComponent implements OnInit {
           ],
         ],
         expirationMonth: ['', Validators.required],
-        expirationyear: ['', Validators.required],
+        expirationYear: ['', Validators.required],
       }),
     });
 
