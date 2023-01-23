@@ -141,7 +141,7 @@ export class CheckoutComponent implements OnInit {
             MyFormValidators.notOnlyWhitespace,
           ],
         ],
-        experationMonth: ['', Validators.required],
+        expirationMonth: ['', Validators.required],
         expirationyear: ['', Validators.required],
       }),
     });
