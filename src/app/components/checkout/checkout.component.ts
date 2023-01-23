@@ -156,17 +156,11 @@ export class CheckoutComponent implements OnInit {
       this.creditCardYears = data;
     });
 
-    this.cartService.totalQuantity.subscribe((data) => {
-      this.totalQuantity = data;
-    });
-
-    this.cartService.totalPrice.subscribe((data) => {
-      this.totalPrice = data;
-    });
-
     this.myformservice.getCountries().subscribe((data) => {
       this.countries = data;
     });
+
+    this.reviewCardDetails();
   }
 
   onSubmit() {
@@ -266,6 +260,15 @@ export class CheckoutComponent implements OnInit {
       if (formGroupName === 'shippingAddress')
         this.shippingAddressStates = data;
       else this.billingAddressStates = data;
+    });
+  }
+  reviewCardDetails() {
+    this.cartService.totalQuantity.subscribe((data) => {
+      this.totalQuantity = data;
+    });
+
+    this.cartService.totalPrice.subscribe((data) => {
+      this.totalPrice = data;
     });
   }
 }
