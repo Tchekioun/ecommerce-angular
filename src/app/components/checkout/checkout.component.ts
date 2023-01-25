@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Country } from 'src/app/common/country';
 import { Order } from 'src/app/common/order';
@@ -61,10 +56,13 @@ export class CheckoutComponent implements OnInit {
             MyFormValidators.notOnlyWhitespace,
           ],
         ],
-        email: new FormControl('', [
-          Validators.required,
-          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
-        ]),
+        email: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+          ],
+        ],
       }),
       shippingAddress: this.formBuilder.group({
         street: [
@@ -154,7 +152,6 @@ export class CheckoutComponent implements OnInit {
     });
 
     const startMonth: number = new Date().getMonth() + 1;
-    console.log(`start month is ${startMonth}`);
 
     this.myformservice.getCrediCardMonths(startMonth).subscribe((data) => {
       this.creditCardMonths = data;
@@ -171,8 +168,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('Handling the submition');
-    console.log(this.checkoutFormGroup.get('customer')?.value);
     if (this.checkoutFormGroup.invalid) {
       this.checkoutFormGroup.markAllAsTouched();
       return;
@@ -188,7 +183,7 @@ export class CheckoutComponent implements OnInit {
     //   orderItems[i] = new OrderItem(cartItems[i]);
     // }
 
-    let orderItemShort: OrderItem[] = cartItems.map(
+    let orderItems: OrderItem[] = cartItems.map(
       (cartItemTemp) => new OrderItem(cartItemTemp)
     );
 
@@ -220,7 +215,7 @@ export class CheckoutComponent implements OnInit {
     purchase.billing_address.country = billingCountry.name;
 
     purchase.order = order;
-    purchase.order_item = orderItemShort;
+    purchase.order_item = orderItems;
 
     this.checkoutService.placeOrder(purchase).subscribe({
       next: (response) => {
@@ -251,6 +246,7 @@ export class CheckoutComponent implements OnInit {
   get email() {
     return this.checkoutFormGroup.get('customer.email');
   }
+
   get shippingAddressStreet() {
     return this.checkoutFormGroup.get('shippingAddress.street');
   }
@@ -260,12 +256,13 @@ export class CheckoutComponent implements OnInit {
   get shippingAddressState() {
     return this.checkoutFormGroup.get('shippingAddress.state');
   }
-  get shippingAddressCountry() {
-    return this.checkoutFormGroup.get('shippingAddress.country');
-  }
   get shippingAddressZipCode() {
     return this.checkoutFormGroup.get('shippingAddress.zipCode');
   }
+  get shippingAddressCountry() {
+    return this.checkoutFormGroup.get('shippingAddress.country');
+  }
+
   get billingAddressStreet() {
     return this.checkoutFormGroup.get('billingAddress.street');
   }
@@ -275,19 +272,20 @@ export class CheckoutComponent implements OnInit {
   get billingAddressState() {
     return this.checkoutFormGroup.get('billingAddress.state');
   }
-  get billingAddressCountry() {
-    return this.checkoutFormGroup.get('billingAddress.country');
-  }
   get billingAddressZipCode() {
     return this.checkoutFormGroup.get('billingAddress.zipCode');
   }
+  get billingAddressCountry() {
+    return this.checkoutFormGroup.get('billingAddress.country');
+  }
+
   get creditCardType() {
-    return this.checkoutFormGroup.get('creditCard.type');
+    return this.checkoutFormGroup.get('creditCard.cardType');
   }
   get creditCardNameOnCard() {
     return this.checkoutFormGroup.get('creditCard.nameOnCard');
   }
-  get creditCardCardNumber() {
+  get creditCardNumber() {
     return this.checkoutFormGroup.get('creditCard.cardNumber');
   }
   get creditCardSecurityCode() {
@@ -296,10 +294,10 @@ export class CheckoutComponent implements OnInit {
 
   copyShippingAddressToBillingAddress(event: any) {
     if (event.target.checked) {
+      this.billingAddressStates = this.shippingAddressStates;
       this.checkoutFormGroup.controls['billingAddress'].setValue(
         this.checkoutFormGroup.controls['shippingAddress'].value
       );
-      this.billingAddressStates = this.shippingAddressStates;
     } else {
       this.checkoutFormGroup.controls['billingAddress'].reset();
       this.billingAddressStates = [];
@@ -319,7 +317,6 @@ export class CheckoutComponent implements OnInit {
       startMonth = 1;
     }
     this.myformservice.getCrediCardMonths(startMonth).subscribe((data) => {
-      console.log(`YOU GOOD ${JSON.stringify(data)}`);
       this.creditCardMonths = data;
     });
   }
