@@ -325,8 +325,8 @@ export class CheckoutComponent implements OnInit {
 
   getStates(formGroupName: string) {
     const formGroup = this.checkoutFormGroup.get(formGroupName);
-    const country_id = formGroup?.value.country;
-    this.myformservice.getStates(country_id).subscribe((data) => {
+    const countryId = formGroup?.value.country;
+    this.myformservice.getStates(countryId).subscribe((data) => {
       if (formGroupName === 'shippingAddress')
         this.shippingAddressStates = data;
       else this.billingAddressStates = data;
