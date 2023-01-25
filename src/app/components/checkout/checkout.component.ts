@@ -174,8 +174,8 @@ export class CheckoutComponent implements OnInit {
     }
 
     let order = new Order();
-    order.total_price = this.totalPrice;
-    order.total_quantity = this.totalQuantity;
+    order.totalPrice = this.totalPrice;
+    order.totalQuantity = this.totalQuantity;
 
     const cartItems = this.cartService.cartItems;
     // let orderItems: OrderItem[] = [];
@@ -188,34 +188,36 @@ export class CheckoutComponent implements OnInit {
     );
 
     let purchase = new Purchase();
+
+    purchase.customer = this.checkoutFormGroup.controls['customer'].value;
     //populate purchase -- shipping Address
-    purchase.shipping_address =
+    purchase.shippingAddress =
       this.checkoutFormGroup.controls['shippingAddress'].value;
 
     const shippingState: State = JSON.parse(
-      JSON.stringify(purchase.shipping_address.state)
+      JSON.stringify(purchase.shippingAddress.state)
     );
     const shippingCountry: Country = JSON.parse(
-      JSON.stringify(purchase.shipping_address.country)
+      JSON.stringify(purchase.shippingAddress.country)
     );
-    purchase.shipping_address.state = shippingState.name;
-    purchase.shipping_address.country = shippingCountry.name;
+    purchase.shippingAddress.state = shippingState.name;
+    purchase.shippingAddress.country = shippingCountry.name;
 
     //populate purchase -- billing Address
-    purchase.billing_address =
+    purchase.billingAddress =
       this.checkoutFormGroup.controls['billingAddress'].value;
 
     const billingState: State = JSON.parse(
-      JSON.stringify(purchase.billing_address.state)
+      JSON.stringify(purchase.billingAddress.state)
     );
     const billingCountry: Country = JSON.parse(
-      JSON.stringify(purchase.billing_address.country)
+      JSON.stringify(purchase.billingAddress.country)
     );
-    purchase.billing_address.state = billingState.name;
-    purchase.billing_address.country = billingCountry.name;
+    purchase.billingAddress.state = billingState.name;
+    purchase.billingAddress.country = billingCountry.name;
 
     purchase.order = order;
-    purchase.order_item = orderItems;
+    purchase.orderItem = orderItems;
 
     this.checkoutService.placeOrder(purchase).subscribe({
       next: (response) => {

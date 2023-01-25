@@ -3,5 +3,5 @@ export class Address {
   city!: string;
   state!: string;
   country!: string;
-  zip_code!: string;
+  zipCode!: string;
 }

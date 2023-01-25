@@ -57,7 +57,7 @@ export class CartService {
     let totalQuantityValue: number = 0;
 
     for (let currentCartItem of this.cartItems) {
-      totalPriceValue += currentCartItem.unit_price * currentCartItem.quantity;
+      totalPriceValue += currentCartItem.unitPrice * currentCartItem.quantity;
       totalQuantityValue += currentCartItem.quantity;
     }
 
@@ -70,7 +70,7 @@ export class CartService {
   }
   // logCartData(totalPriceValue: number, totalQuantityValue: number) {
   //   for (let tempCartItem of this.cartItems) {
-  //     const subTotalPrice = tempCartItem.unit_price * tempCartItem.quantity;
+  //     const subTotalPrice = tempCartItem.unitPrice * tempCartItem.quantity;
   //     console.log(
   //       `id: ${tempCartItem.id} name: ${tempCartItem.name} subtotalPrice: ${totalPriceValue},  quantity: ${tempCartItem.quantity}`
   //     );
