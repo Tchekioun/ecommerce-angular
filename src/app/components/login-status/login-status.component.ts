@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { OktaAuthStateService, OKTA_AUTH } from '@okta/okta-angular';
-import OktaAuth from '@okta/okta-auth-js';
+import { OktaAuth } from '@okta/okta-auth-js';
 
 @Component({
   selector: 'app-login-status',
@@ -30,9 +30,14 @@ export class LoginStatusComponent implements OnInit {
 
       //user full name is exposed as a property name
 
-      this.oktaAuth.getUser().then((res) => {
-        this.userFullName = res.name as string;
-      });
+      this.oktaAuth
+        .getUser()
+        .then((res) => {
+          this.userFullName = res.name as string;
+        })
+        .catch((err: any) => {
+          console.log(`Promise ERROR:${err}`);
+        });
     }
   }
 

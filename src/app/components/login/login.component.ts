@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { OKTA_AUTH } from '@okta/okta-angular';
 import { OktaAuth } from '@okta/okta-auth-js';
 import OktaSignIn from '@okta/okta-signin-widget';
@@ -10,7 +10,7 @@ import myAppConfig from '../../config/my-app-config';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   oktaSignin: any;
 
   constructor(@Inject(OKTA_AUTH) private oktaAuth: OktaAuth) {
@@ -28,8 +28,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.oktaSignin.remove();
-
     this.oktaSignin.renderEl(
       {
         el: '#okta-sign-in-widget',
@@ -43,5 +41,8 @@ export class LoginComponent implements OnInit {
         console.log(`THERE IS AN ERROR:${error}`);
       }
     );
+  }
+  ngOnDestroy(): void {
+    this.oktaSignin.remove();
   }
 }
