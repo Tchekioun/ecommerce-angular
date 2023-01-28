@@ -159,6 +159,7 @@
                 <select formControlName="state">
                   <option
                     *ngFor="let shippingAddressState of shippingAddressStates"
+                    [ngValue]="shippingAddressState.id"
                   >
                     {{ shippingAddressState.name }}
                   </option>
@@ -303,6 +304,7 @@
                 <select formControlName="state">
                   <option
                     *ngFor="let billingAddressState of billingAddressStates"
+                    [ngValue]="billingAddressState.id"
                   >
                     {{ billingAddressState.name }}
                   </option>
