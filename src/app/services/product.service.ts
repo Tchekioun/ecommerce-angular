@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Category } from '../common/category';
 import { Product } from '../common/product';
 import { ProductPage } from '../common/product-page';
@@ -9,8 +10,8 @@ import { ProductPage } from '../common/product-page';
   providedIn: 'root',
 })
 export class ProductService {
-  private categoryUrl = 'http://localhost:3000/categories';
-  private baseUrl = 'http://localhost:3000/products';
+  private categoryUrl = environment.storeUrl + '/categories';
+  private baseUrl = environment.storeUrl + '/products';
 
   constructor(private httpClient: HttpClient) {}
 

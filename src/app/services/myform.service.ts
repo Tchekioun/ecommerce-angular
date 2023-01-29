@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Country } from '../common/country';
 import { State } from '../common/state';
 
@@ -8,7 +9,7 @@ import { State } from '../common/state';
   providedIn: 'root',
 })
 export class MyformService {
-  private countriesUrl = 'http://localhost:3000/countries';
+  private countriesUrl = environment.storeUrl + '/countries';
 
   getCountries(): Observable<Country[]> {
     return this.httpClient.get<Country[]>(this.countriesUrl);
